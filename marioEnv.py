@@ -8,12 +8,9 @@ import gym
 from gym.spaces import Box
 from gym.wrappers import FrameStack
 
+from nes_py.wrappers import JoypadSpace
+
 import gym_super_mario_bros
-
-
-# env.reset()
-# next_state, reward, done, info = env.step(action=0)
-# print(f"{next_state.shape}\n{reward}\n{done}\n{info}")
 
 class SkipFrame(gym.Wrapper):
     def __init__(self, env, skip):
@@ -35,7 +32,7 @@ class SkipFrame(gym.Wrapper):
                 break
         return obs, total_reward, done, info
 
-class GrayScaleObservation(gym.Observation):
+class GrayScaleObservation(gym.ObservationWrapper):
     def __init__(self, env):
         super().__init__(env)
         obs_shape = self.observation_space.shape[:2]
